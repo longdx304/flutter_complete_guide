@@ -4,7 +4,7 @@ import 'package:flutter_complete_guide/question.dart';
 
 void main() => runApp(MyApp());
 
-var questions = [
+const questions = [
   {
     'questionText': 'What\'s your favorite color?',
     'answers': ['Red', 'White', 'Blue', 'Yellow'],

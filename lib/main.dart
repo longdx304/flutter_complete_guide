@@ -4,9 +4,15 @@ import 'package:flutter_complete_guide/question.dart';
 
 void main() => runApp(MyApp());
 
-List<String> questions = [
-  'First question',
-  'Second question',
+var questions = [
+  {
+    'questionText': 'What\'s your favorite color?',
+    'answers': ['Red', 'White', 'Blue', 'Yellow'],
+  },
+  {
+    'questionText': 'What\'s your favorite animal?',
+    'answers': ['Lion', 'Dog', 'Cat'],
+  },
 ];
 
 class MyApp extends StatefulWidget {
@@ -32,10 +38,11 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: [
-            Question(questions[_questionIndex]),
-            Answer(_answerQuestion),
-            Answer(_answerQuestion),
-            Answer(_answerQuestion),
+            Question(questions[_questionIndex]['questionText']),
+            ...(questions[_questionIndex]['answers'] as List<String>)
+                .map((answer) {
+              return Answer(_answerQuestion, answer);
+            }).toList(),
           ],
         ),
       ),

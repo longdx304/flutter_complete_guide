@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_complete_guide/answer.dart';
 import 'package:flutter_complete_guide/question.dart';
 
 void main() => runApp(MyApp());
@@ -18,6 +19,10 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   int _questionIndex = 0;
 
+  void _answerQuestion() {
+    setState(() => _questionIndex++);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,18 +33,9 @@ class _MyAppState extends State<MyApp> {
         body: Column(
           children: [
             Question(questions[_questionIndex]),
-            RaisedButton(
-              child: Text('Answer 1'),
-              onPressed: () => setState(() => _questionIndex++),
-            ),
-            RaisedButton(
-              child: Text('Answer 1'),
-              onPressed: null,
-            ),
-            RaisedButton(
-              child: Text('Answer 1'),
-              onPressed: null,
-            ),
+            Answer(_answerQuestion),
+            Answer(_answerQuestion),
+            Answer(_answerQuestion),
           ],
         ),
       ),

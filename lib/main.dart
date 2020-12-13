@@ -1,19 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_guide/answer.dart';
-import 'package:flutter_complete_guide/question.dart';
+
+import 'quiz.dart';
+import 'result.dart';
 
 void main() => runApp(MyApp());
-
-const questions = [
-  {
-    'questionText': 'What\'s your favorite color?',
-    'answers': ['Red', 'White', 'Blue', 'Yellow'],
-  },
-  {
-    'questionText': 'What\'s your favorite animal?',
-    'answers': ['Lion', 'Dog', 'Cat'],
-  },
-];
 
 class MyApp extends StatefulWidget {
   @override
@@ -23,6 +13,16 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final _questions = const [
+    {
+      'questionText': 'What\'s your favorite color?',
+      'answers': ['Red', 'White', 'Blue', 'Yellow'],
+    },
+    {
+      'questionText': 'What\'s your favorite animal?',
+      'answers': ['Lion', 'Dog', 'Cat'],
+    },
+  ];
   int _questionIndex = 0;
 
   void _answerQuestion() {
@@ -36,19 +36,13 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text('Example App'),
         ),
-        body: _questionIndex < questions.length
-            ? Column(
-                children: [
-                  Question(questions[_questionIndex]['questionText']),
-                  ...(questions[_questionIndex]['answers'] as List<String>)
-                      .map((answer) {
-                    return Answer(_answerQuestion, answer);
-                  }).toList(),
-                ],
+        body: _questionIndex < _questions.length
+            ? Quiz(
+                answerQuestion: _answerQuestion,
+                questionIndex: _questionIndex,
+                questions: _questions,
               )
-            : Center(
-                child: Text('You did it!'),
-              ),
+            : Result(),
       ),
     );
   }
